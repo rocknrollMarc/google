@@ -7,13 +7,24 @@
          )}">
       <div class="small-8 columns">{{ mail.from}}</div>
       <div class="small-12 columns">{{ mail.subject }}</div>
-
-
     </div>
-    {{ mail }}
   </ul>
 </div>
 
 <div class="small-8 columns" ng-controller="ContentController">
   <h2>Content</h2>
+  <div ng-show="!selectedMail">
+    <h1>No conversation selected</h1>
+    </div>
+  <div ng-show="selectedMail">
+    <div ng-show="selectedMail">
+      <div class="small-6 columns"> {{ selectedMail.subject }}</div>
+      <div class="small-6 columns"> {{ selectedMail.sent_at | date:'MM/dd/yy' }}</div>
+    </div>
+    <div class="row actions">
+      <div class="small-8 columns"> {{ selectedMail.from.join(" , ") }}</div>
+    </div>
+    <a ng-click="showReply()" class="button radius push-1">Reply</a>
+    <div class="small-12 columns" ng-bind-html-unsafe="selectedMail.body"></div>
+  </div>
 </div>
