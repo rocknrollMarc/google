@@ -7,11 +7,25 @@ app.config(function($routeProvider){
     templateUrl: "templates/home.html",
     controller: 'HomeController'
   })
-  .otherwize({redirectTo: '/'});
+        .when('/settings', {
+            templateUrl: 'templates/settings.html',
+            controller: 'SettingsController'
+        })
+  .otherwize({ redirectTo: '/' });
 });
 
 app.controller('HomeController', function($scope){
+    $scope.selectMail;
 
+    $scope.setSelectedMail = function(mail) {
+        $scope.selectMail = mail;
+    };
+
+    $scope.isSelected = function(mail) {
+        if($scope.selectMail) {
+            return $scope.selectMail == mail;
+        }
+    };
 });
 
 app.controller('MailListingController', ['$scope', '$http', function($scope,
